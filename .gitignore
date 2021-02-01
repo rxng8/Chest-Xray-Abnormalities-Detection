@@ -1,2 +1,8 @@
+
 **__pycache__/
-**dataset/
+
+# Exclude everything in dataset but 3 files.
+/dataset/*
+!**.gitignore
+!**README
+!/dataset/sample.dicom
