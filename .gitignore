@@ -6,3 +6,5 @@
 !**.gitignore
 !**README
 !/dataset/sample.dicom
+!/dataset/download_dataset.sh
+!/dataset/preprocess_data.py
