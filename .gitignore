@@ -4,7 +4,7 @@
 # Exclude everything in dataset but 3 files.
 /dataset/*
 !**.gitignore
-!**README
+!**README.md
 !/dataset/sample.dicom
 !/dataset/download_dataset.sh
 !/dataset/preprocess_data.py
