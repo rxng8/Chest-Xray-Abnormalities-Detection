@@ -1,5 +1,17 @@
-# Setup:
+# Vin Big Data Chest X-RAY Abnormalies Detection - Kaggle Competition
 
-* Kaggle:
-  * Set up kaggle. 
-  * [Create api key and move the key file to ./kaggle folder.](https://github.com/Kaggle/kaggle-api/issues/15#issuecomment-500713264)
+## About the project:
+This project is created for academic purpose and also available publicly. More information about the competition can be found [here](https://www.kaggle.com/c/vinbigdata-chest-xray-abnormalities-detection/).
+
+## Prerequisites:
+* [Anaconda]()
+* Kaggle API:
+  * [Set up kaggle](https://www.kaggle.com/docs/api). 
+  * [Create api key and move the key file to ./kaggle folder.](https://github.com/Kaggle/kaggle-api/issues/15#issuecomment-500713264).
+
+## Run the project:
+
+```
+#To be editted
+```
+
