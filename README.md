@@ -53,5 +53,5 @@ This project is created for academic purpose and also available publicly. More i
 ## Week 4: Feb 22 - Feb 26:
 * Implement on-scratch Faster R-CNN Model. (9 hours)
 
-## Week 4: March 1 - March 5:
+## Week 5: March 1 - March 5:
 * \<to be eddited\>
