@@ -1,4 +1,4 @@
-# Vin Big Data Chest X-RAY Abnormalies Detection - Kaggle Competition
+# Chest X RAY Abnormalities Detection | VinBigData's Kaggle Competition
 
 ## About the project:
 This project is created for academic purpose and also available publicly. More information about the competition can be found [here](https://www.kaggle.com/c/vinbigdata-chest-xray-abnormalities-detection/).
