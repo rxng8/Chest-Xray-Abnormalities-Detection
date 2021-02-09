@@ -52,3 +52,9 @@ def make_deconv_layer(out_channels, activation='relu'):
         padding='same',
         activation=activation
     )
+
+def compute_mae_loss(real, pred):
+    return tf.reduce_mean(tf.math.abs(real - pred))
+
+def compute_mse_loss(real, pred):
+    return tf.reduce_mean(tf.math.abs(real - pred) ** 2)
