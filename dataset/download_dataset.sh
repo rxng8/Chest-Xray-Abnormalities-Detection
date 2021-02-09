@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Author: Alex Nguyen
+# Gettysburg College
+
 mkdir tmp
 cd ./tmp
 

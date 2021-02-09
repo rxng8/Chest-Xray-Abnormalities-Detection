@@ -5,7 +5,3 @@
    Author: Alex Nguyen
    Gettysburg College
 """
-
-
-from .utils import *
-from .dataset import *

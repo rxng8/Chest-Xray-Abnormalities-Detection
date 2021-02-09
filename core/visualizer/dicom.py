@@ -1,3 +1,11 @@
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+"""
+   Author: Alex Nguyen
+   Gettysburg College
+"""
+
 import matplotlib.pyplot as plt
 from pydicom.dataset import FileDataset
 import numpy as np

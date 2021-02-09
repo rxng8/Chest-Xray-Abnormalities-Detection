@@ -6,6 +6,5 @@
    Gettysburg College
 """
 
-
 from .utils import *
-from .dataset import *
+from .networks import *
