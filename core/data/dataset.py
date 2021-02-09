@@ -17,7 +17,7 @@ import random
 import tensorflow as tf
 from sklearn.model_selection import train_test_split
 
-from .utils import show_img, preprocess_image
+from .utils import preprocess_img, load_image
 
 
 class BaseDataset:
@@ -37,9 +37,22 @@ class Dataset256(BaseDataset):
     def __init__(self, root: str, img_shape: Tuple, batch_size: int=16, steps_per_epoch: int=20):
         super().__init__(root, img_shape, batch_size=batch_size, steps_per_epoch=steps_per_epoch)
         self.test_file = os.path.join(root, "test.csv")
-        self.train_file = os.path.join(root, "train.csv") 
+        self.train_file = os.path.join(root, "train.csv")
         self.test_data = os.path.join(root, "test")
         self.train_data = os.path.join(root, "train")
         self.sample_submisison = os.path.join(root, "sample_submission.csv")
     
-    
+    def sample(self, preprocess: bool=False, **kwargs) -> np.ndarray:
+        """ Return an image that is in the train dataset
+
+        Returns:
+            np.ndarray: A numpy repr of the image. If preprocess is False,
+                an image with original shape is returned. Otherwise, it will
+                preprocess the image
+        """
+        dir = os.listdir(self.train_data)
+        r = random.randint(0, len(dir) - 1)
+        img = load_image(os.path.join(self.train_data, dir[r]))
+        if preprocess:
+            img = preprocess_img(img, **kwargs)
+        return img

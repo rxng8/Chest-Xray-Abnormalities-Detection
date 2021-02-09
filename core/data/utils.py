@@ -28,7 +28,7 @@ def k_fold():
     """
     pass
 
-def preprocess_image(
+def preprocess_img(
         src_img: np.ndarray, 
         shape,
         resize_method=tf.image.ResizeMethod.BILINEAR,
