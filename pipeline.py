@@ -15,25 +15,26 @@ import matplotlib.pyplot as plt
 import tensorflow as tf
 import numpy as np
 
-from core.data import Dataset256, show_img
+from core.data import DatasetCOCO, show_img
 
 # CONFIG
 
 IMG_SHAPE = (256, 256)
 
-root_data_folder = "./dataset/vinbigdata-256-image-dataset/vinbigdata"
+root_data_folder = "./dataset/vinbigdata-coco-dataset-with-wbf-3x-downscaled/vinbigdata-coco-dataset-with-wbf-3x-downscaled"
 
-ds = Dataset256(root_data_folder, img_shape=IMG_SHAPE)
+ds = DatasetCOCO(root_data_folder, img_shape=IMG_SHAPE)
 
 # %%
 
 # See sample
-sample = ds.sample(preprocess=True, shape=IMG_SHAPE)
-show_img(sample[:, :, 0])
+# sample = ds.sample(preprocess=True, shape=IMG_SHAPE)
+sample = ds.sample()
+# show_img(sample[:, :, 0])
 
 # %%
 
-
+sample.shape
 
 
 

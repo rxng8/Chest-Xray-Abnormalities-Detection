@@ -56,3 +56,29 @@ class Dataset256(BaseDataset):
         if preprocess:
             img = preprocess_img(img, **kwargs)
         return img
+
+class DatasetCOCO(BaseDataset):
+    def __init__(self, root: str, img_shape: Tuple, batch_size: int=16, steps_per_epoch: int=20):
+        super().__init__(root, img_shape, batch_size=batch_size, steps_per_epoch=steps_per_epoch)
+        self.test_label = os.path.join(root, "test_annotations.json")
+        self.train_label = os.path.join(root, "train_annotations.json")
+        self.test_data = os.path.join(root, "test_images")
+        self.train_data = os.path.join(root, "train_images")
+    
+    def sample(self, preprocess: bool=False, **kwargs) -> np.ndarray:
+        """ Return an image that is in the train dataset
+
+        Returns:
+            np.ndarray: A numpy repr of the image. If preprocess is False,
+                an image with original shape is returned. Otherwise, it will
+                preprocess the image
+        """
+        dir = os.listdir(self.train_data)
+        r = random.randint(0, len(dir) - 1)
+        img = load_image(os.path.join(self.train_data, dir[r]))
+        if preprocess:
+            img = preprocess_img(img, **kwargs)
+        else:
+            assert len(img.shape) == 2, "Wrong expected image shape."
+            img = tf.expand_dims(img, axis=-1)
+        return img
