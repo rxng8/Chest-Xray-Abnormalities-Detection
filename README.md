@@ -44,6 +44,7 @@ This project is created for academic purpose and also available publicly. More i
   * [`data`](./core/data): Contains data preprocessing utilities and dataset models.
 * **[4 hours]** Implements the R-CNN neural network with high-level librar, in particular:
   * [`models`](./core/models): Contains model building utilities, and initial code of Faster R-CNN model.
+  * [``](): Integrate the use of `Tensorflow Object Detection API`.
 
 ---------------
 # Tentative:
@@ -63,3 +64,5 @@ This project is created for academic purpose and also available publicly. More i
 # Resources:
 1. [https://missinglink.ai/guides/tensorflow/building-faster-r-cnn-on-tensorflow-introduction-and-examples/](https://missinglink.ai/guides/tensorflow/building-faster-r-cnn-on-tensorflow-introduction-and-examples/): 
 2. [Tensorflow Object Detection Model zoo](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf2_detection_zoo.md): 
+3. [Faster R-CNN layer information](https://towardsdatascience.com/faster-r-cnn-object-detection-implemented-by-keras-for-custom-data-from-googles-open-images-125f62b9141a): 
+4. [Tensorflow object detection API](https://github.com/tensorflow/models/blob/master/research/object_detection/g3doc/tf2.md): 
