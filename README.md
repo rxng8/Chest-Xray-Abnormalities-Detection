@@ -42,16 +42,18 @@ This project is created for academic purpose and also available publicly. More i
 ## Week 2: Feb 8 - Feb 12:
 * **[5 hours]** Implement data preprocessing pipeline, in particular:
   * [`data`](./core/data): Contains data preprocessing utilities and dataset models.
-* **[4 hours]** Implements the R-CNN neural network with high-level librar, in particular:
+* **[4 hours]** Implements the R-CNN neural network with high-level library, in particular:
   * [`models`](./core/models): Contains model building utilities, and initial code of Faster R-CNN model.
-  * [``](): Integrate the use of `Tensorflow Object Detection API`.
 
 ---------------
 # Tentative:
+
 ## Week 3: Feb 15 - Feb 19:
-* Finish the whole pipeline and train models. (3 hours)
-* Improve and refactor library to the application. (6 hours)
+* Finish the whole pipeline and train models.
+* Improve and refactor library to the application.
   * Implement according to [this tutorial](https://towardsdatascience.com/training-a-tensorflow-faster-r-cnn-object-detection-model-on-your-own-dataset-b3b175708d6d) and this [kaggle notebook](https://www.kaggle.com/leighplt/starter-faster-r-cnn)
+* [``](): Integrate the use of `Tensorflow Object Detection API`.
+* Implement a simple pytorch notebook.
 
 ## Week 4: Feb 22 - Feb 26:
 * Implement on-scratch Faster R-CNN Model. (9 hours)
