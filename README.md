@@ -54,6 +54,7 @@ This project is created for academic purpose and also available publicly. More i
   * Implement according to [this tutorial](https://towardsdatascience.com/training-a-tensorflow-faster-r-cnn-object-detection-model-on-your-own-dataset-b3b175708d6d) and this [kaggle notebook](https://www.kaggle.com/leighplt/starter-faster-r-cnn)
 * [``](): Integrate the use of `Tensorflow Object Detection API`.
 * Implement a simple pytorch notebook.
+* [more reference](https://towardsdatascience.com/how-to-build-a-custom-object-detector-classifier-using-tensorflow-object-detection-api-811b7bcd31c4)
 
 ## Week 4: Feb 22 - Feb 26:
 * Implement on-scratch Faster R-CNN Model. (9 hours)
