@@ -13,4 +13,4 @@ bash /download_dataset.sh 256 512 yolo
 - [Dataset `1024`](https://www.kaggle.com/awsaf49/vinbigdata-1024-image-dataset) - 8 Gb
 - [Dataset `yolo`](https://www.kaggle.com/awsaf49/vinbigdata-yolo-labels-dataset) - 5 Mb
 - [Dataset `orig`](https://www.kaggle.com/awsaf49/vinbigdata-original-image-dataset) - 24 Gb.
-- [Dataset `coco`](https://www.kaggle.com/sreevishnudamodaran/vinbigdata-coco-dataset-with-wbf-3x-downscaled) - 897 Mb
+- [Dataset `coco`](https://www.kaggle.com/sreevishnudamodaran/vinbigdata-coco-dataset-with-wbf-3x-downscaled) - 897 Mb. [See how data set COCO's annotation is structured](https://youtu.be/h6s61a_pqfM?t=630).
