@@ -45,19 +45,23 @@ This project is created for academic purpose and also available publicly. More i
 * **[4 hours]** Implements the R-CNN neural network with high-level library, in particular:
   * [`models`](./core/models): Contains model building utilities, and initial code of Faster R-CNN model.
 
+## Week 3: Feb 15 - Feb 19:
+
+* [`API`](./Tensorflow/models): Integrate the use of `Tensorflow Object Detection API`.
+  * **[3 hours]** Install the tensorflow model library and setup protobuf.
+  * [more reference](https://towardsdatascience.com/how-to-build-a-custom-object-detector-classifier-using-tensorflow-object-detection-api-811b7bcd31c4)
+  * **[2 hours]** Write [COCO Dataset Wrapper](./core/data/dataset.py) for further processing, especially export to `tfrecord`.
+  * **[2 hours]** Generate image annotation and `tfrecord` annotation for tensorflow model usage.
+
 ---------------
 # Tentative:
 
-## Week 3: Feb 15 - Feb 19:
+## Week 4: Feb 22 - Feb 26:
 * Finish the whole pipeline and train models.
 * Improve and refactor library to the application.
   * Implement according to [this tutorial](https://towardsdatascience.com/training-a-tensorflow-faster-r-cnn-object-detection-model-on-your-own-dataset-b3b175708d6d) and this [kaggle notebook](https://www.kaggle.com/leighplt/starter-faster-r-cnn)
-* [``](): Integrate the use of `Tensorflow Object Detection API`.
-* Implement a simple pytorch notebook.
-* [more reference](https://towardsdatascience.com/how-to-build-a-custom-object-detector-classifier-using-tensorflow-object-detection-api-811b7bcd31c4)
-
-## Week 4: Feb 22 - Feb 26:
 * Implement on-scratch Faster R-CNN Model. (9 hours)
+* Implement a simple pytorch notebook.
 
 ## Week 5: March 1 - March 5:
 * \<to be eddited\>
