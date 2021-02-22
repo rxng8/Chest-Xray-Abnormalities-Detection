@@ -24,6 +24,8 @@ optional arguments:
                         Path to the folder where the input image files are stored. Defaults to the same directory as XML_DIR.
   -c CSV_PATH, --csv_path CSV_PATH
                         Path of output .csv file. If none provided, then no file will be written.
+  -j CSV_PATH_INPUT, --csv_path_input
+                        Path to csv file data input.
 """
 
 import os
@@ -61,6 +63,11 @@ parser.add_argument("-c",
                     "--csv_path",
                     help="Path of output .csv file. If none provided, then no file will be "
                          "written.",
+                    type=str, default=None)
+
+parser.add_argument("-j",
+                    "--csv_path_input",
+                    help="Path of input .csv file",
                     type=str, default=None)
 
 args = parser.parse_args()
@@ -121,6 +128,7 @@ def create_tf_example(group, path):
     with tf.gfile.GFile(os.path.join(path, '{}'.format(group.filename)), 'rb') as fid:
         encoded_jpg = fid.read()
     encoded_jpg_io = io.BytesIO(encoded_jpg)
+    
     image = Image.open(encoded_jpg_io)
     width, height = image.size
 
@@ -162,11 +170,15 @@ def main(_):
 
     writer = tf.python_io.TFRecordWriter(args.output_path)
     path = os.path.join(args.image_dir)
-    examples = xml_to_csv(args.xml_dir)
+    # examples = xml_to_csv(args.xml_dir)
+    examples = pd.read_csv(args.csv_path_input)
     grouped = split(examples, 'filename')
     for group in grouped:
-        tf_example = create_tf_example(group, path)
-        writer.write(tf_example.SerializeToString())
+        try:
+            tf_example = create_tf_example(group, path)
+            writer.write(tf_example.SerializeToString())
+        except:
+            print("Error extracting path: ", path, " , skipping...")
     writer.close()
     print('Successfully created the TFRecord file: {}'.format(args.output_path))
     if args.csv_path is not None:

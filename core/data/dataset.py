@@ -61,7 +61,23 @@ class Dataset256(BaseDataset):
         return img
 
 class DatasetCOCO(BaseDataset):
-    
+    INT2LABEL = {
+        0: "Aortic enlargement",
+        1: "Atelectasis",
+        2: "Calcification",
+        3: "Cardiomegaly",
+        4: "Consolidation",
+        5: "ILD",
+        6: "Infiltration",
+        7: "Lung Opacity",
+        8: "Nodule/Mass",
+        9: "Other lesion",
+        10: "Pleural effusion",
+        11: "Pleural thickening",
+        12: "Pneumothorax",
+        13: "Pulmonary fibrosis",
+        14: "No finding",
+    }
     class COCOInstance():
         def __init__(
             self, 
@@ -77,8 +93,14 @@ class DatasetCOCO(BaseDataset):
         def __str__(self):
             return f"File name: {self.filename}, class: {self.clss}"
         
-        def add_box(self, xmin, ymin, xmax, ymax, clss: int) -> None:
-            self.boxes.append({"class": clss, "box":[xmin, ymin, xmax, ymax]})
+        def add_box(self, xmin, ymin, xmax, ymax, clss: int, tf_record_mode=False) -> None:
+            if tf_record_mode:
+                # TODO: Be careful!
+                # With this mode, 0 means no diseases, does it also means background? no!
+                # self.boxes.append({"class": (clss + 1) % 16, "box":[xmin, ymin, xmax, ymax]})
+                self.boxes.append({"class": DatasetCOCO.INT2LABEL[clss], "box":[xmin, ymin, xmax, ymax]})
+            else:
+                self.boxes.append({"class": clss, "box":[xmin, ymin, xmax, ymax]})
 
     def __init__(self, root: str, img_shape: Tuple, batch_size: int=16, steps_per_epoch: int=20):
         super().__init__(root, img_shape, batch_size=batch_size, steps_per_epoch=steps_per_epoch)
@@ -117,9 +139,47 @@ class DatasetCOCO(BaseDataset):
             image_id = annotation["image_id"]
             self.dataset[key][image_id].add_box(
                 *annotation["bbox"],
-                annotation["category_id"]
+                annotation["category_id"],
+                tf_record_mode=True
             )
 
+    def export_csv(self, target_path: str):
+        data = []
+
+        # Code to append to data list here!
+        for image_id, obj in self.dataset["train"].items():
+            for _dict in obj.boxes:
+                value = (
+                    obj.filename,
+                    str(obj.width),
+                    str(obj.height),
+                    str(_dict["class"]),
+                    str(_dict["box"][0]),
+                    str(_dict["box"][1]),
+                    str(_dict["box"][2]),
+                    str(_dict["box"][3])
+                )
+                data.append(value)
+
+        for image_id, obj in self.dataset["val"].items():
+            for _dict in obj.boxes:
+                value = (
+                    obj.filename,
+                    str(obj.width),
+                    str(obj.height),
+                    str(_dict["class"]),
+                    str(_dict["box"][0]),
+                    str(_dict["box"][1]),
+                    str(_dict["box"][2]),
+                    str(_dict["box"][3])
+                )
+                data.append(value)
+
+        column_name = ['filename', 'width', 'height',
+                   'class', 'xmin', 'ymin', 'xmax', 'ymax']
+        data_df = pd.DataFrame(data, columns=column_name)
+        data_df.to_csv(target_path)
+        return data_df
 
     def sample(self, preprocess: bool=False, **kwargs) -> np.ndarray:
         """ Return an image that is in the train dataset

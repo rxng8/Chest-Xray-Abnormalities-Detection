@@ -1,74 +1,74 @@
 item {
-    id: 0
+    id: 1
     name: 'Aortic enlargement'
 }
 
 item {
-    id: 1
+    id: 2
     name: 'Atelectasis'
 }
 
 item {
-    id: 2
+    id: 3
     name: 'Calcification'
 }
 
 item {
-    id: 3
+    id: 4
     name: 'Cardiomegaly'
 }
 
 item {
-    id: 4
+    id: 5
     name: 'Consolidation'
 }
 
 item {
-    id: 5
+    id: 6
     name: 'ILD'
 }
 
 item {
-    id: 6
+    id: 7
     name: 'Infiltration'
 }
 
 item {
-    id: 7
+    id: 8
     name: 'Lung Opacity'
 }
 
 item {
-    id: 8
+    id: 9
     name: 'Nodule/Mass'
 }
 
 item {
-    id: 9
+    id: 10
     name: 'Other lesion'
 }
 
 item {
-    id: 10
+    id: 11
     name: 'Pleural effusion'
 }
 
 item {
-    id: 11
+    id: 12
     name: 'Pleural thickening'
 }
 
 item {
-    id: 12
+    id: 13
     name: 'Pneumothorax'
 }
 
 item {
-    id: 13
+    id: 14
     name: 'Pulmonary fibrosis'
 }
 
 item {
-    id: 14
+    id: 15
     name: 'No finding'
 }

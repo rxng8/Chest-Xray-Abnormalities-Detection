@@ -34,6 +34,11 @@ ds = DatasetCOCO(root_data_folder, img_shape=IMG_SHAPE)
 #                 'class', 'xmin', 'ymin', 'xmax', 'ymax']
 # json_df = pd.DataFrame(a, columns=column_name)
 
+# %%
+
+ds.export_csv("./test.csv")
+
+
 
 # %%
 
