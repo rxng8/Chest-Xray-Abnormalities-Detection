@@ -26,6 +26,11 @@ This project is created for academic purpose and also available publicly. More i
 ```
 #To be editted
 ```
+
+```
+python ./Tensorflow\scripts\generate_tf_records.py -j ./test.csv  -x dataset\vinbigdata-coco-dataset-with-wbf-3x-downscaled\vinbigdata-coco-dataset-with-wbf-3x-downscaled -l Tensorflow/workspace/training-demo/annotations/label_map.pbtxt -o Tensorflow\workspace\training-demo\annotations/train.record
+```
+
 ---------------
 # Project Backlog:
 
@@ -53,18 +58,19 @@ This project is created for academic purpose and also available publicly. More i
   * **[2 hours]** Write [COCO Dataset Wrapper](./core/data/dataset.py) for further processing, especially export to `tfrecord`.
   * **[2 hours]** Generate image annotation and `tfrecord` annotation for tensorflow model usage.
 
+## Week 4: Feb 22 - Feb 26:
+* [**5 hours**] Successfully implement the data pipeline and export to tfrecord.
+* Writing documentation.
+
 ---------------
+
 # Tentative:
 
-## Week 4: Feb 22 - Feb 26:
+## Week 5: March 1 - March 5:
 * Finish the whole pipeline and train models.
 * Improve and refactor library to the application.
   * Implement according to [this tutorial](https://towardsdatascience.com/training-a-tensorflow-faster-r-cnn-object-detection-model-on-your-own-dataset-b3b175708d6d) and this [kaggle notebook](https://www.kaggle.com/leighplt/starter-faster-r-cnn)
 * Implement on-scratch Faster R-CNN Model. (9 hours)
-* Implement a simple pytorch notebook.
-
-## Week 5: March 1 - March 5:
-* \<to be eddited\>
 
 -----------------
 
