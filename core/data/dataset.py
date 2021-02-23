@@ -10,6 +10,7 @@ import sys
 from pathlib import Path
 from typing import Collection, List, Dict, Tuple
 import numpy as np
+import re
 from numpy.lib.type_check import imag
 import pandas as pd
 from PIL import Image
@@ -85,7 +86,10 @@ class DatasetCOCO(BaseDataset):
             width: float, 
             height: float
         ) -> None:
-            self.filename = filename
+            if "/" in filename or "\\" in filename:
+                self.filename = re.findall(r"[\\|\/].*jpg$", filename)[0][1:]
+            else:
+                self.filename = filename
             self.width = width
             self.height = height
             self.boxes = []
@@ -143,8 +147,8 @@ class DatasetCOCO(BaseDataset):
                 tf_record_mode=True
             )
 
-    def export_csv(self, target_path: str):
-        data = []
+    def export_csv(self, target_train_path: str, target_val_path: str):
+        data_train = []
 
         # Code to append to data list here!
         for image_id, obj in self.dataset["train"].items():
@@ -159,8 +163,9 @@ class DatasetCOCO(BaseDataset):
                     str(_dict["box"][2]),
                     str(_dict["box"][3])
                 )
-                data.append(value)
+                data_train.append(value)
 
+        data_val = []
         for image_id, obj in self.dataset["val"].items():
             for _dict in obj.boxes:
                 value = (
@@ -173,13 +178,15 @@ class DatasetCOCO(BaseDataset):
                     str(_dict["box"][2]),
                     str(_dict["box"][3])
                 )
-                data.append(value)
+                data_val.append(value)
 
         column_name = ['filename', 'width', 'height',
                    'class', 'xmin', 'ymin', 'xmax', 'ymax']
-        data_df = pd.DataFrame(data, columns=column_name)
-        data_df.to_csv(target_path)
-        return data_df
+        data_train_df = pd.DataFrame(data_train, columns=column_name)
+        data_train_df.to_csv(target_train_path, index=False)
+        data_val_df = pd.DataFrame(data_val, columns=column_name)
+        data_val_df.to_csv(target_val_path, index=False)
+        return data_train_df, data_val_df
 
     def sample(self, preprocess: bool=False, **kwargs) -> np.ndarray:
         """ Return an image that is in the train dataset
