@@ -202,4 +202,4 @@ class DatasetCOCO(BaseDataset):
     def __str__(self):
         len_train = len(self.dataset["train"])
         len_val = len(self.dataset["val"])
-        return f"Dataset:\nTrain: {len_train} items.\nVal: {len_val} items."
+        return f"Dataset:\nTrain: {len_train} items.\nVal: {len_val} items. "
