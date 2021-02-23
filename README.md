@@ -28,10 +28,12 @@ This project is created for academic purpose and also available publicly. More i
 ```
 
 ```
-python ./Tensorflow\scripts\generate_tf_records.py -j ./test.csv  -x dataset\vinbigdata-coco-dataset-with-wbf-3x-downscaled\vinbigdata-coco-dataset-with-wbf-3x-downscaled -l Tensorflow/workspace/training-demo/annotations/label_map.pbtxt -o Tensorflow\workspace\training-demo\annotations/train.record
+python ./Tensorflow/scripts/generate_tf_records.py -j ./tmp/train.csv  -i ./Tensorflow/workspace/training-demo/images/train -l ./Tensorflow/workspace/training-demo/annotations/label_map.pbtxt -o ./Tensorflow/workspace/training-demo/annotations/train.record
+
+python ./Tensorflow/scripts/generate_tf_records.py -j ./tmp/val.csv  -i ./Tensorflow/workspace/training-demo/images/test -l ./Tensorflow/workspace/training-demo/annotations/label_map.pbtxt -o ./Tensorflow/workspace/training-demo/annotations/val.record
 
 # in training folder 
-python model_main_tf2.py --model_dir=models\mymodel --pipeline_config_path=models\mymodel\pipeline.config
+python model_main_tf2.py --model_dir=models/mymodel --pipeline_config_path=models/mymodel/pipeline.config
 ```
 
 ---------------
