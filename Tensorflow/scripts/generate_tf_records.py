@@ -34,6 +34,7 @@ import pandas as pd
 import io
 import xml.etree.ElementTree as ET
 import argparse
+import numpy as np
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'    # Suppress TensorFlow logging (1)
 import tensorflow.compat.v1 as tf
@@ -125,10 +126,13 @@ def split(df, group):
 
 
 def create_tf_example(group, path):
-    with tf.gfile.GFile(os.path.join(path, '{}'.format(group.filename)), 'rb') as fid:
-        encoded_jpg = fid.read()
-    encoded_jpg_io = io.BytesIO(encoded_jpg)
-    
+    try:
+        with tf.gfile.GFile(os.path.join(path, '{}'.format(group.filename)), 'rb') as fid:
+            encoded_jpg = fid.read()
+        encoded_jpg_io = io.BytesIO(encoded_jpg)
+    except:
+        print("no existing file:", os.path.join(path, '{}'.format(group.filename)))
+        return
     image = Image.open(encoded_jpg_io)
     width, height = image.size
 
@@ -142,10 +146,38 @@ def create_tf_example(group, path):
     classes = []
 
     for index, row in group.object.iterrows():
-        xmins.append(row['xmin'] / width)
-        xmaxs.append(row['xmax'] / width)
-        ymins.append(row['ymin'] / height)
-        ymaxs.append(row['ymax'] / height)
+        xmin = row['xmin'] / width
+        xmax = row['xmax'] / width
+        ymin = row['ymin'] / height
+        ymax = row['ymax'] / height
+        xmin = np.min(xmin, xmax)
+        xmax = np.max(xmin, xmax)
+        ymin = np.min(ymin, ymax)
+        ymax = np.max(ymin, ymax)
+        if xmin < 0.0:
+            xmin = 0.0
+        elif xmin > 1.0:
+            xmin = 1.0
+
+        if xmax < 0.0:
+            xmax = 0.0
+        elif xmax > 1.0:
+            xmax = 1.0
+        
+        if ymin < 0.0:
+            ymin = 0.0
+        elif ymin > 1.0:
+            ymin = 1.0
+
+        if ymax < 0.0:
+            ymax = 0.0
+        elif ymax > 1.0:
+            ymax = 1.0
+
+        xmins.append(xmin)
+        xmaxs.append(xmax)
+        ymins.append(ymin)
+        ymaxs.append(ymaxs)
         classes_text.append(row['class'].encode('utf8'))
         classes.append(class_text_to_int(row['class']))
 
@@ -170,15 +202,19 @@ def main(_):
 
     writer = tf.python_io.TFRecordWriter(args.output_path)
     path = os.path.join(args.image_dir)
-    # examples = xml_to_csv(args.xml_dir)
+    
+    # Editted here!
     examples = pd.read_csv(args.csv_path_input)
+    if args.xml_dir is not None:
+        examples = xml_to_csv(args.xml_dir)
+    
     grouped = split(examples, 'filename')
     for group in grouped:
         try:
             tf_example = create_tf_example(group, path)
             writer.write(tf_example.SerializeToString())
         except:
-            print("Error extracting path: ", path, " , skipping...")
+            pass
     writer.close()
     print('Successfully created the TFRecord file: {}'.format(args.output_path))
     if args.csv_path is not None:
