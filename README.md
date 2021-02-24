@@ -64,8 +64,14 @@ python model_main_tf2.py --model_dir=models/mymodel --pipeline_config_path=model
   * **[2 hours]** Generate image annotation and `tfrecord` annotation for tensorflow model usage.
 
 ## Week 4: Feb 22 - Feb 26:
-* [**5 hours**] Successfully implement the data pipeline and export to tfrecord.
-* Writing documentation.
+* [**7 hours**] Successfully implement the data pipeline and export to tfrecord.
+  * [**4 hours**] Implement the data wrapper class [`DatasetCOCO`](./core/data/dataset.py).
+  * [**3 hours**] Copy and re-implement the scripts [`generate_tf_records.py`](./Tensorflow/scripts/generate_tf_records.py). This file takes inputs csv containing paths, bounding boxes, classes, etc, to generate `tfrecord` files for api training.
+* [**2 hours**] Writing documentation.
+* [**4 hours**] Train and export models to be evaluated in future.
+  * (Do not counted this) [**10 hours**] Wait for the model to be trained on GPU.
+  * [**2 hours**] Exporting models and evaluate on the validation set. (To be added!)
+  * [**2 hours**] Draws tensorflow graph, here is the result: (To be added!)
 
 ---------------
 
@@ -76,6 +82,28 @@ python model_main_tf2.py --model_dir=models/mymodel --pipeline_config_path=model
 * Improve and refactor library to the application.
   * Implement according to [this tutorial](https://towardsdatascience.com/training-a-tensorflow-faster-r-cnn-object-detection-model-on-your-own-dataset-b3b175708d6d) and this [kaggle notebook](https://www.kaggle.com/leighplt/starter-faster-r-cnn)
 * Implement on-scratch Faster R-CNN Model. (9 hours)
+
+## Week 6: March 8 - March 12:
+
+## Week 7: March 15 - March 19:
+
+## Week 8: March 22 - March 26:
+
+## Week 9: March 29 - April 2:
+
+## Week 10: April 5 - April 9:
+
+## Week 11: April 12 - April 15:
+
+## Week 12: April 18 - April 22:
+
+## Week 13: April 25 - April 28:
+
+## Week 14: May 1 - May 5:
+
+## Week 15: May 8 - May 12:
+
+## Week 16: May 15 - May 19:
 
 -----------------
 
