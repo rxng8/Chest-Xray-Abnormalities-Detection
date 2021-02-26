@@ -9,5 +9,10 @@
 !/dataset/download_dataset.sh
 !/dataset/preprocess_data.py
 
-Tensorflow/workspace
+Tensorflow/workspace/training-demo/*
+!Tensorflow/workspace/training-demo/annotations/*
+!Tensorflow/workspace/training-demo/model_main_tf2.py
 **tmp/
+
+**.record
+**.csv
