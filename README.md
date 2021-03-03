@@ -112,9 +112,8 @@ bash download_dataset.sh coco
   * [**3 hours**] Copy and re-implement the scripts [`generate_tf_records.py`](./Tensorflow/scripts/generate_tf_records.py). This file takes inputs csv containing paths, bounding boxes, classes, etc, to generate `tfrecord` files for api training. (I spend almost 2 hours on fixing the bugs: [sanity error](https://stackoverflow.com/questions/62075321/tensorflow-python-framework-errors-impl-invalidargumenterror-invalid-argument))
 * [**2 hours**] Writing documentation for methods, installation, and requirements.
 * [**4 hours**] Train and export models to be evaluated in future.
-  * (Do not counted this) [**10 hours**] Wait for the model to be trained on GPU.
-  * [**2 hours**] Exporting models and evaluate on the validation set. (To be added!)
-  * [**2 hours**] Draws tensorflow graph, here is the result: (To be added!)
+  * (Do not counted this) [**26 hours**] (Have not done yet! My GPU is too small) Wait for the model to be trained on GPU.
+  * [**2 hours**] Writing exporting models and evaluate on the validation set. (To be added!)
 
 ---------------
 
