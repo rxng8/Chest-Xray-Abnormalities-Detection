@@ -64,7 +64,8 @@ sample = ds.sample()
 sample.shape
 
 # %%
+import re
+filename = "train_images\\0a0ac65c40a9ac441651e4bfbde03c4e.jpg"
+filename = re.findall(r"[\\|\/].*jpg$", filename)[0][1:]
 
-
-
-
+filename
