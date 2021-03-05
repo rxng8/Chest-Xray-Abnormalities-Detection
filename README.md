@@ -111,21 +111,36 @@ bash download_dataset.sh coco
   * [**4 hours**] Implement the data wrapper class [`DatasetCOCO`](./core/data/dataset.py). Sucessfully generate csv file as needed.
   * [**3 hours**] Copy and re-implement the scripts [`generate_tf_records.py`](./Tensorflow/scripts/generate_tf_records.py). This file takes inputs csv containing paths, bounding boxes, classes, etc, to generate `tfrecord` files for api training. (I spend almost 2 hours on fixing the bugs: [sanity error](https://stackoverflow.com/questions/62075321/tensorflow-python-framework-errors-impl-invalidargumenterror-invalid-argument))
 * [**2 hours**] Writing documentation for methods, installation, and requirements.
-* [**4 hours**] Train and export models to be evaluated in future.
+* [**2 hours**] Train and export models to be evaluated in future.
   * (Do not counted this) [**26 hours**] (Have not done yet! My GPU is too small) Wait for the model to be trained on GPU.
   * [**2 hours**] Writing exporting models and evaluate on the validation set. (To be added!)
+
+## Week 5: March 1 - March 5:
+* [**4 hours**] Fixing environment bug.
+* [**5 hours**] Reading and preparing `DatasetCOCOPytorch` for [`dataset.py`](core/data/dataset.py) for pytorch transfer leanring and prepare [training pipeline](./faster_rnn.py). Here is the architecture for the Faster R-CNN: ![](https://tryolabs.com/blog/images/blog/post-images/2018-01-18-faster-rcnn/fasterrcnn-architecture.b9035cba.png) Refer to [this link](https://www.alegion.com/faster-r-cnn) for further reading. Here is the [kaggle notebook](https://www.kaggle.com/chekoduadarsh/pytorch-beginner-code-faster-rcnn) that use transfer learning. Here is the code block that replace the top layer with our final classification layer:
+  ```
+  model = torchvision.models.detection.fasterrcnn_resnet50_fpn(pretrained=True)
+  num_classes = 15 # 14 Classes + 1 background
+
+  # get number of input features for the classifier
+  in_features = model.roi_heads.box_predictor.cls_score.in_features
+
+  # replace the pre-trained head with a new one
+  model.roi_heads.box_predictor = FastRCNNPredictor(in_features, num_classes)
+  ```
+  * [**1 hours**] Research about transfer learning and pytorch custom dataset.
+  * [**2 hours**] Walking-through and writing Pytorch dataset: `DatasetCOCOPytorch` in [`dataset.py`](core/data/dataset.py) for pytorch transfer leanring.
+  * [**2 hours**] Wrting pipeline: [training pipeline](./faster_rnn.py).
 
 ---------------
 
 # Tentative:
 
-## Week 5: March 1 - March 5:
+## Week 6: March 8 - March 12:
 * Finish the whole pipeline and train models.
 * Improve and refactor library to the application.
   * Implement according to [this tutorial](https://towardsdatascience.com/training-a-tensorflow-faster-r-cnn-object-detection-model-on-your-own-dataset-b3b175708d6d) and this [kaggle notebook](https://www.kaggle.com/leighplt/starter-faster-r-cnn)
 * Implement on-scratch Faster R-CNN Model. (9 hours)
-
-## Week 6: March 8 - March 12:
 
 ## Week 7: March 15 - March 19:
 
