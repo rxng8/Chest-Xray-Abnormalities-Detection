@@ -17,12 +17,18 @@ from PIL import Image
 import os
 import random
 import tensorflow as tf
+import torch
+from torch.utils.data import Dataset, DataLoader
+from torchvision import transforms, utils
 import collections
 import json
 from sklearn.model_selection import train_test_split
 
 from .utils import preprocess_img, load_image
 
+# Ignore warnings
+import warnings
+warnings.filterwarnings("ignore")
 
 class BaseDataset:
     def __init__(self, root: str, img_shape: Tuple, batch_size: int=16, steps_per_epoch: int=20):
@@ -107,6 +113,18 @@ class DatasetCOCO(BaseDataset):
                 self.boxes.append({"class": clss, "box":[xmin, ymin, xmax, ymax]})
 
     def __init__(self, root: str, img_shape: Tuple, batch_size: int=16, steps_per_epoch: int=20):
+        """ Initialization.
+        self.dataset: 
+        {
+            "train": {id: COCOInstance},
+            "val": {id: COCOInstance}
+        }
+        Args:
+            root (str): [description]
+            img_shape (Tuple): [description]
+            batch_size (int, optional): [description]. Defaults to 16.
+            steps_per_epoch (int, optional): [description]. Defaults to 20.
+        """
         super().__init__(root, img_shape, batch_size=batch_size, steps_per_epoch=steps_per_epoch)
         self.val_label = os.path.join(root, "val_annotations.json")
         self.train_label = os.path.join(root, "train_annotations.json")
@@ -190,7 +208,9 @@ class DatasetCOCO(BaseDataset):
 
     def sample(self, preprocess: bool=False, **kwargs) -> np.ndarray:
         """ Return an image that is in the train dataset
-
+        Params:
+            preprocess (bool): 
+            (preprocess_img **kwargs): 
         Returns:
             np.ndarray: A numpy repr of the image. If preprocess is False,
                 an image with original shape is returned. Otherwise, it will
@@ -209,4 +229,36 @@ class DatasetCOCO(BaseDataset):
     def __str__(self):
         len_train = len(self.dataset["train"])
         len_val = len(self.dataset["val"])
-        return f"Dataset:\nTrain: {len_train} items.\nVal: {len_val} items. "
+        return f"Dataset:\nTrain: {len_train} items.\nVal: {len_val} items."
+
+
+class DatasetCOCOPytorch(DatasetCOCO, Dataset):
+    def __init__(self, root: str, img_shape: Tuple, train_set=True, **kwargs):
+        super().__init__(root, img_shape, **kwargs)
+        if train_set:
+            self.dataset = self.dataset["train"]
+        else:
+            self.dataset = self.dataset["val"]
+    
+    def __build_path(self, img_name):
+        if self.train_set:
+            return os.path.join(self.root, "train", img_name)
+        else:
+            return os.path.join(self.root, "val", img_name)
+
+    def __len__(self):
+        return len(self.dataset)
+
+    def __getitem__(self, idx):
+        if torch.is_tensor(idx):
+            idx = idx.tolist()
+
+        img_name = os.path.join(self.root_dir,
+                                self.landmarks_frame.iloc[idx, 0])
+        image = Image.open()
+        sample = {'image': image, 'landmarks': landmarks}
+
+        # if self.transform:
+        #     sample = self.transform(sample)
+
+        return sample
