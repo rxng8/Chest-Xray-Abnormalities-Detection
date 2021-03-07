@@ -114,7 +114,7 @@ bash download_dataset.sh coco
 * [**2 hours**] Train and export models to be evaluated in future.
   * (Do not counted this) [**26 hours**] (Have not done yet! My GPU is too small) Wait for the model to be trained on GPU.
   * [**2 hours**] Writing exporting models and evaluate on the validation set. (To be added!)
-
+ 
 ## Week 5: March 1 - March 5:
 * [**4 hours**] Fixing environment bug.
 * [**5 hours**] Reading and preparing `DatasetCOCOPytorch` for [`dataset.py`](core/data/dataset.py) for pytorch transfer leanring and prepare [training pipeline](./faster_rnn.py). Here is the architecture for the Faster R-CNN: ![](https://tryolabs.com/blog/images/blog/post-images/2018-01-18-faster-rcnn/fasterrcnn-architecture.b9035cba.png) Refer to [this link](https://www.alegion.com/faster-r-cnn) for further reading. Here is the [kaggle notebook](https://www.kaggle.com/chekoduadarsh/pytorch-beginner-code-faster-rcnn) that use transfer learning. Here is the code block that replace the top layer with our final classification layer:
