@@ -132,17 +132,28 @@ bash download_dataset.sh coco
   * [**2 hours**] Walking-through and writing Pytorch dataset: `DatasetCOCOPytorch` in [`dataset.py`](core/data/dataset.py) for pytorch transfer leanring.
   * [**2 hours**] Wrting pipeline: [training pipeline](./faster_rnn.py).
 
+## Week 6: March 8 - March 12:
+* [**3 hours**] Finish the Pytorch dataset: `DatasetCOCOPytorch` in [`dataset.py`](core/data/dataset.py) for pytorch transfer leanring.
+  * `__len__()`: Get the length of the dataset.
+  * `__getitem__()`: Get current (image, label) at the current index in the dataset.
+* [**2 hours**]: Create conda environment and version-controlled libraries. We can now run the conda virtual environment with file [`environment.yml`](./environment.yml)
+  * Now we can create virtual environment with the following code:
+  ```
+  conda env create -f environment.yml
+  ```
+
 ---------------
 
 # Tentative:
 
-## Week 6: March 8 - March 12:
+
+
+## Week 7: March 15 - March 19:
 * Finish the whole pipeline and train models.
 * Improve and refactor library to the application.
   * Implement according to [this tutorial](https://towardsdatascience.com/training-a-tensorflow-faster-r-cnn-object-detection-model-on-your-own-dataset-b3b175708d6d) and this [kaggle notebook](https://www.kaggle.com/leighplt/starter-faster-r-cnn)
 * Implement on-scratch Faster R-CNN Model. (9 hours)
 
-## Week 7: March 15 - March 19:
 
 ## Week 8: March 22 - March 26:
 
