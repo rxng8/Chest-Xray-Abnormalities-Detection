@@ -1,0 +1,4 @@
+name: pytorch
+channels:
+  - defaults
+prefix: C:\Users\alexv\miniconda3\envs\pytorch
