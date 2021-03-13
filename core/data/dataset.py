@@ -233,12 +233,14 @@ class DatasetCOCO(BaseDataset):
 
 
 class DatasetCOCOPytorch(DatasetCOCO, Dataset):
-    def __init__(self, root: str, img_shape: Tuple, train_set=True, **kwargs):
+    def __init__(self, root: str, img_shape: Tuple, train_set=True, transform=None, **kwargs):
         super().__init__(root, img_shape, **kwargs)
         if train_set:
             self.dataset = self.dataset["train"]
         else:
             self.dataset = self.dataset["val"]
+        # self.indices = collections.defaultdict(int)
+        self.transform = transform
     
     def __build_path(self, img_name):
         if self.train_set:
@@ -250,15 +252,63 @@ class DatasetCOCOPytorch(DatasetCOCO, Dataset):
         return len(self.dataset)
 
     def __getitem__(self, idx):
-        if torch.is_tensor(idx):
-            idx = idx.tolist()
+        # if torch.is_tensor(idx):
+        #     idx = idx.tolist()
+        print("id: ", idx)
 
-        img_name = os.path.join(self.root_dir,
-                                self.landmarks_frame.iloc[idx, 0])
-        image = Image.open()
-        sample = {'image': image, 'landmarks': landmarks}
+        # Since the image index in the dataset start from 0, we
+        # can assume that the index for the internal dataset be
+        # the same as the id of the image.
+        img_name = self.dataset[idx].filename
+        img_path = self.__build_path(img_name)
+        image = np.asarray(Image.open(img_path))
 
-        # if self.transform:
-        #     sample = self.transform(sample)
+        assert len(image.shape) == 2, "Wrong shape length!"
 
-        return sample
+        image = np.stack([image, image, image])
+        image = image.astype('float32')
+        image = image - image.min()
+        image = image / image.max()
+        image = image * 255.0
+        image = image.transpose(1,2,0)
+
+        boxes = []
+        labels = []
+        for dict_datum in self.dataset[idx].boxes:
+            boxes.append(dict_datum["box"])
+            labels.append(dict_datum["class"])
+        boxes = torch.as_tensor(boxes, dtype=torch.float32)
+        labels = torch.as_tensor(labels, dtype=torch.int32)
+
+        area = (boxes[:, 3] - boxes[:, 1]) * (boxes[:, 2] - boxes[:, 0])
+        area = torch.as_tensor(area, dtype=torch.float32)
+
+        # suppose all instances are not crowd
+        iscrowd = torch.zeros((boxes.shape[0],), dtype=torch.int64)
+
+        target = {}
+        target['boxes'] = boxes
+        target['labels'] = labels
+        target['image_id'] = torch.tensor([idx])
+        target['area'] = area
+        target['iscrowd'] = iscrowd
+
+        if self.transform:
+            sample = {
+                'image': image,
+                'bboxes': target['boxes'],
+                'labels': labels
+            }
+            sample = self.transforms(**sample)
+            image = sample['image']
+
+            target['boxes'] = torch.tensor(sample['bboxes'])
+
+        if target["boxes"].shape[0] == 0:
+            # Albumentation cuts the target (class 14, 1x1px in the corner)
+            target["boxes"] = torch.from_numpy(np.array([[0.0, 0.0, 1.0, 1.0]]))
+            target["area"] = torch.tensor([1.0], dtype=torch.float32)
+            target["labels"] = torch.tensor([14], dtype=torch.int64)
+
+        # return sample
+        return image, target, idx
