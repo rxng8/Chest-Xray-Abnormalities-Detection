@@ -19,6 +19,10 @@ import json
 
 from PIL import Image
 
+import albumentations as A
+from albumentations.pytorch.transforms import ToTensorV2
+from albumentations.core.transforms_interface import ImageOnlyTransform
+
 import torch
 import torchvision
 
@@ -65,4 +69,25 @@ ds = DatasetCOCO(root_data_folder, img_shape=IMG_SHAPE)
 # %%
 
 len(ds.dataset["train"].values())
+
+# %%
+
+def get_train_transform():
+    return A.Compose([
+        A.Flip(0.5),
+        A.ShiftScaleRotate(scale_limit=0.1, rotate_limit=45, p=0.25),
+        A.LongestMaxSize(max_size=800, p=1.0),
+        Dilation(),
+        # FasterRCNN will normalize.
+        A.Normalize(mean=(0, 0, 0), std=(1, 1, 1), max_pixel_value=255.0, p=1.0),
+        ToTensorV2(p=1.0)
+    ], bbox_params={'format': 'pascal_voc', 'label_fields': ['labels']})
+
+
+# %%
+
+train_dataset = DatasetCOCOPytorch(root=root_data_folder, img_shape=IMG_SHAPE, transform=get_train_transform())
+
+# %%
+
 
