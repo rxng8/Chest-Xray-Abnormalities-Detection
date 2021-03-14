@@ -136,10 +136,15 @@ bash download_dataset.sh coco
 * [**3 hours**] Finish the Pytorch dataset: `DatasetCOCOPytorch` in [`dataset.py`](core/data/dataset.py) for pytorch transfer leanring.
   * `__len__()`: Get the length of the dataset.
   * `__getitem__()`: Get current (image, label) at the current index in the dataset.
-* [**2 hours**]: Create conda environment and version-controlled libraries. We can now run the conda virtual environment with file [`environment.yml`](./environment.yml)
+* [**6 hours**]: Create conda environment and version-controlled libraries. We can now run the conda virtual environment with file [`environment.yml`](./environment.yml)
   * Now we can create virtual environment with the following code:
   ```
   conda env create -f environment.yml
+  ```
+  * Creating environment costs so much time! Prepare libraries:
+  ```
+  conda install -n pytorch matplotlib pandas albumentations opencv -c conda-forge
+  conda install -n pytorch pytorch torchvision torchaudio cudatoolkit=11.1 -c pytorch -c conda-forge
   ```
 
 ---------------
