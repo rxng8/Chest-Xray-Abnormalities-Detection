@@ -112,7 +112,7 @@ class DatasetCOCO(BaseDataset):
             else:
                 self.boxes.append({"class": clss, "box":[xmin, ymin, xmax, ymax]})
 
-    def __init__(self, root: str, img_shape: Tuple, batch_size: int=16, steps_per_epoch: int=20):
+    def __init__(self, root: str, img_shape: Tuple, batch_size: int=16, steps_per_epoch: int=20, tf_record_mode=False):
         """ Initialization.
         self.dataset: 
         {
@@ -126,6 +126,7 @@ class DatasetCOCO(BaseDataset):
             steps_per_epoch (int, optional): [description]. Defaults to 20.
         """
         super().__init__(root, img_shape, batch_size=batch_size, steps_per_epoch=steps_per_epoch)
+        self.tf_record_mode = tf_record_mode
         self.val_label = os.path.join(root, "val_annotations.json")
         self.train_label = os.path.join(root, "train_annotations.json")
         self.val_data = os.path.join(root, "val_images")
@@ -161,8 +162,8 @@ class DatasetCOCO(BaseDataset):
             image_id = annotation["image_id"]
             self.dataset[key][image_id].add_box(
                 *annotation["bbox"],
-                annotation["category_id"],
-                tf_record_mode=True
+                int(annotation["category_id"]),
+                tf_record_mode=self.tf_record_mode
             )
 
     def export_csv(self, target_train_path: str, target_val_path: str):
@@ -233,20 +234,21 @@ class DatasetCOCO(BaseDataset):
 
 
 class DatasetCOCOPytorch(DatasetCOCO, Dataset):
-    def __init__(self, root: str, img_shape: Tuple, train_set=True, transform=None, **kwargs):
+    def __init__(self, root: str, img_shape: Tuple, train_set=True, transforms=None, **kwargs):
         super().__init__(root, img_shape, **kwargs)
         if train_set:
             self.dataset = self.dataset["train"]
         else:
             self.dataset = self.dataset["val"]
         # self.indices = collections.defaultdict(int)
-        self.transform = transform
+        self.transforms = transforms
+        self.train_set = train_set
     
     def __build_path(self, img_name):
         if self.train_set:
-            return os.path.join(self.root, "train", img_name)
+            return os.path.join(self.root, "train_images", img_name)
         else:
-            return os.path.join(self.root, "val", img_name)
+            return os.path.join(self.root, "val_images", img_name)
 
     def __len__(self):
         return len(self.dataset)
@@ -293,7 +295,7 @@ class DatasetCOCOPytorch(DatasetCOCO, Dataset):
         target['area'] = area
         target['iscrowd'] = iscrowd
 
-        if self.transform:
+        if self.transforms:
             sample = {
                 'image': image,
                 'bboxes': target['boxes'],
