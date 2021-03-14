@@ -4,19 +4,29 @@ channels:
   - conda-forge
   - defaults
 dependencies:
+  - backcall=0.2.0=pyhd3eb1b0_0
   - blas=2.108=mkl
   - blas-devel=3.9.0=8_mkl
-  - ca-certificates=2020.12.5=h5b45459_0
-  - certifi=2020.12.5=py39hcbf5309_1
+  - ca-certificates=2021.1.19=haa95532_1
+  - certifi=2020.12.5=py39haa95532_0
+  - colorama=0.4.4=pyhd3eb1b0_0
   - cudatoolkit=11.1.1=heb2d755_7
+  - decorator=4.4.2=pyhd3eb1b0_0
   - freetype=2.10.4=h546665d_1
   - intel-openmp=2020.3=h57928b3_311
+  - ipykernel=5.3.4=py39h7b7c402_0
+  - ipython=7.21.0=py39hd4e2768_0
+  - ipython_genutils=0.2.0=pyhd3eb1b0_1
+  - jedi=0.17.2=py39haa95532_1
   - jpeg=9b=hb83a4c4_2
+  - jupyter_client=6.1.7=py_0
+  - jupyter_core=4.7.1=py39haa95532_0
   - libblas=3.9.0=8_mkl
   - libcblas=3.9.0=8_mkl
   - liblapack=3.9.0=8_mkl
   - liblapacke=3.9.0=8_mkl
   - libpng=1.6.37=h1d00b33_2
+  - libsodium=1.0.18=h62dcd97_0
   - libtiff=4.1.0=h56a325e_1
   - libuv=1.41.0=h8ffe710_0
   - lz4-c=1.9.3=h8ffe710_0
@@ -32,24 +42,36 @@ dependencies:
   - ninja=1.10.2=h5362a0b_0
   - numpy=1.20.1=py39h6635163_0
   - olefile=0.46=pyh9f0ad1d_1
-  - openssl=1.1.1j=h8ffe710_0
+  - openssl=1.1.1j=h2bbff1b_0
+  - parso=0.7.0=py_0
+  - pickleshare=0.7.5=pyhd3eb1b0_1003
   - pillow=8.1.2=py39h4fa10fc_0
   - pip=21.0.1=pyhd8ed1ab_0
+  - prompt-toolkit=3.0.8=py_0
+  - pygments=2.8.1=pyhd3eb1b0_0
   - python=3.9.2=h7840368_0_cpython
+  - python-dateutil=2.8.1=pyhd3eb1b0_0
   - python_abi=3.9=1_cp39
   - pytorch=1.8.0=py3.9_cuda11.1_cudnn8_0
+  - pywin32=228=py39he774522_0
+  - pyzmq=20.0.0=py39hd77b12b_1
   - setuptools=49.6.0=py39hcbf5309_3
+  - six=1.15.0=py39haa95532_0
   - sqlite=3.34.0=h8ffe710_0
   - tk=8.6.10=h8ffe710_1
   - torchaudio=0.8.0=py39
   - torchvision=0.9.0=py39_cu111
+  - tornado=6.1=py39h2bbff1b_0
+  - traitlets=5.0.5=pyhd3eb1b0_0
   - typing_extensions=3.7.4.3=py_0
   - tzdata=2021a=he74cb21_0
   - vc=14.2=hb210afc_4
   - vs2015_runtime=14.28.29325=h5e1d092_4
+  - wcwidth=0.2.5=py_0
   - wheel=0.36.2=pyhd3deb0d_0
   - wincertstore=0.2=py39hcbf5309_1006
   - xz=5.2.5=h62dcd97_1
+  - zeromq=4.3.3=ha925a31_3
   - zlib=1.2.11=h62dcd97_1010
   - zstd=1.4.9=h6255e5f_0
 prefix: C:\Users\alexv\miniconda3\envs\pytorch
