@@ -108,9 +108,25 @@ class DatasetCOCO(BaseDataset):
                 # TODO: Be careful!
                 # With this mode, 0 means no diseases, does it also means background? no!
                 # self.boxes.append({"class": (clss + 1) % 16, "box":[xmin, ymin, xmax, ymax]})
-                self.boxes.append({"class": DatasetCOCO.INT2LABEL[clss], "box":[xmin, ymin, xmax, ymax]})
+                self.boxes.append({
+                    "class": DatasetCOCO.INT2LABEL[clss], 
+                    "box":[
+                        min(xmin, xmax), 
+                        min(ymin, ymax), 
+                        max(xmin, xmax), 
+                        max(ymin, ymax)
+                    ]
+                })
             else:
-                self.boxes.append({"class": clss, "box":[xmin, ymin, xmax, ymax]})
+                self.boxes.append({
+                    "class": clss, 
+                    "box":[
+                        min(xmin, xmax), 
+                        min(ymin, ymax), 
+                        max(xmin, xmax), 
+                        max(ymin, ymax)
+                    ]
+                })
 
     def __init__(self, root: str, img_shape: Tuple, batch_size: int=16, steps_per_epoch: int=20, tf_record_mode=False):
         """ Initialization.
@@ -256,7 +272,7 @@ class DatasetCOCOPytorch(DatasetCOCO, Dataset):
     def __getitem__(self, idx):
         # if torch.is_tensor(idx):
         #     idx = idx.tolist()
-        print("id: ", idx)
+        # print("id: ", idx)
 
         # Since the image index in the dataset start from 0, we
         # can assume that the index for the internal dataset be
@@ -280,13 +296,13 @@ class DatasetCOCOPytorch(DatasetCOCO, Dataset):
             boxes.append(dict_datum["box"])
             labels.append(dict_datum["class"])
         boxes = torch.as_tensor(boxes, dtype=torch.float32)
-        labels = torch.as_tensor(labels, dtype=torch.int32)
+        labels = torch.as_tensor(labels, dtype=torch.int64)
 
         area = (boxes[:, 3] - boxes[:, 1]) * (boxes[:, 2] - boxes[:, 0])
         area = torch.as_tensor(area, dtype=torch.float32)
 
         # suppose all instances are not crowd
-        iscrowd = torch.zeros((boxes.shape[0],), dtype=torch.int64)
+        iscrowd = torch.zeros((boxes.shape[0],), dtype=torch.uint8)
 
         target = {}
         target['boxes'] = boxes
