@@ -145,22 +145,19 @@ bash download_dataset.sh coco
   ```
   conda install -n pytorch matplotlib pandas albumentations opencv -c conda-forge
   conda install -n pytorch pytorch torchvision torchaudio cudatoolkit=11.1 -c pytorch -c conda-forge
+  conda install -n pytorch tensorflow-gpu -c anaconda
   ```
+## Week 7: March 15 - March 19:
+* [**9 hours**] Finish the whole pipeline and train models Faster R-CNN with transfer learning with pytorch. Here is the [kaggle colab notebook](https://www.kaggle.com/rxngrxng/faster-r-cnn)
 
 ---------------
 
 # Tentative:
 
-
-
-## Week 7: March 15 - March 19:
-* Finish the whole pipeline and train models.
+## Week 8: March 22 - March 26:
 * Improve and refactor library to the application.
   * Implement according to [this tutorial](https://towardsdatascience.com/training-a-tensorflow-faster-r-cnn-object-detection-model-on-your-own-dataset-b3b175708d6d) and this [kaggle notebook](https://www.kaggle.com/leighplt/starter-faster-r-cnn)
 * Implement on-scratch Faster R-CNN Model. (9 hours)
-
-
-## Week 8: March 22 - March 26:
 
 ## Week 9: March 29 - April 2:
 
