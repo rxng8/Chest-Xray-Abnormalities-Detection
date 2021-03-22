@@ -16,3 +16,5 @@ Tensorflow/workspace/training-demo/*
 
 **.record
 **.csv
+
+**.pth
