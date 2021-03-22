@@ -1,5 +1,6 @@
 
 **__pycache__/
+.vscode
 
 # Exclude everything in dataset but 3 files.
 /dataset/*
@@ -18,3 +19,4 @@ Tensorflow/workspace/training-demo/*
 **.csv
 
 **.pth
+
