@@ -155,7 +155,8 @@ bash download_dataset.sh coco
 * [**1 hours**] Produce and submit the first submission from the `faster_rcnn2.py` notebook (0.087 point).
 * [**6 hours**] Recreate, redesign `faster_rcnn.py` and successfully trained with transfer learning. Here is the result:
 ![](./docs/process.png)
-* [**2 hours**] 
+[Link to the pytorch saved model](https://drive.google.com/file/d/1YW08sx1qL397th3vLILthrZFiiqLiw9K/view?usp=sharing)
+<!-- * [**2 hours**] Writing evaluation and building submission. -->
 
 
 ---------------
