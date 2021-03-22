@@ -150,16 +150,21 @@ bash download_dataset.sh coco
 ## Week 7: March 15 - March 19:
 * [**9 hours**] Finish the whole pipeline and train models Faster R-CNN with transfer learning with pytorch. Here is the [kaggle colab notebook](https://www.kaggle.com/rxngrxng/faster-r-cnn)
 
+## Week 8: March 22 - March 26:
+* [**4 hours**] Creating new version of the notebook which is more clear. ([`faster_rcnn2.py`](./faster_rnn2.py))
+* [**1 hours**] Produce and submit the first submission (0.087 point).
+
+
 ---------------
 
 # Tentative:
 
-## Week 8: March 22 - March 26:
+
+## Week 9: March 29 - April 2:
 * Improve and refactor library to the application.
   * Implement according to [this tutorial](https://towardsdatascience.com/training-a-tensorflow-faster-r-cnn-object-detection-model-on-your-own-dataset-b3b175708d6d) and this [kaggle notebook](https://www.kaggle.com/leighplt/starter-faster-r-cnn)
 * Implement on-scratch Faster R-CNN Model. (9 hours)
 
-## Week 9: March 29 - April 2:
 
 ## Week 10: April 5 - April 9:
 
