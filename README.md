@@ -149,6 +149,7 @@ bash download_dataset.sh coco
   ```
 ## Week 7: March 15 - March 19:
 * [**9 hours**] Finish the whole pipeline and train models Faster R-CNN with transfer learning with pytorch. Here is the [kaggle colab notebook](https://www.kaggle.com/rxngrxng/faster-r-cnn)
+* [**2 hours**] Doing exam. (Private code!)
 
 ## Week 8: March 22 - March 26:
 * [**2 hours**] Creating new version of the notebook which is more clear. ([`faster_rcnn2.py`](./faster_rcnn2.py))
@@ -156,7 +157,7 @@ bash download_dataset.sh coco
 * [**6 hours**] Recreate, redesign `faster_rcnn.py` and successfully trained with transfer learning. Here is the result:
 ![](./docs/process.png)
 [Link to the pytorch saved model](https://drive.google.com/file/d/1YW08sx1qL397th3vLILthrZFiiqLiw9K/view?usp=sharing)
-<!-- * [**2 hours**] Writing evaluation and building submission. -->
+* [**1 hours**] Writing evaluation and building submission.
 
 
 ---------------
