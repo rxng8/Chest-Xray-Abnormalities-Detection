@@ -73,9 +73,9 @@ device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cp
 
 # %%
 
-# ds = DatasetCOCO(root_data_folder, img_shape=IMG_SHAPE)
-
-# len(ds.dataset["train"].values())
+# UNCOMMENT TO LOAD WEIGHT
+# MODEL_NAME = "model.pth"
+# model.load_state_dict(torch.load(os.path.join(MODEL_DIR, MODEL_NAME)))
 
 # %%
 
@@ -215,8 +215,97 @@ torch.save(model.state_dict(), os.path.join(MODEL_DIR, MODEL_NAME))
 
 # %%
 
-
 # Eval
+
+def format_prediction_string(labels, boxes, scores):
+    pred_strings = []
+    for j in zip(labels, scores, boxes):
+        pred_strings.append("{0} {1:.4f} {2} {3} {4} {5}".format(
+            j[0], j[1], j[2][0], j[2][1], j[2][2], j[2][3]))
+
+    return " ".join(pred_strings)
+
+
+# %%
+
+detection_threshold = 0.5
+results = []
+
+with torch.no_grad():
+
+    for images, image_ids in valid_data_loader:
+
+        images = list(image.to(device) for image in images)
+        outputs = model(images)
+
+        for i, image in enumerate(images):
+
+            image_id = image_ids[i]
+
+            result = {
+                'image_id': image_id,
+                'PredictionString': '14 1.0 0 0 1 1'
+            }
+
+            boxes = outputs[i]['boxes'].data.cpu().numpy()
+            labels = outputs[i]['labels'].data.cpu().numpy()
+            scores = outputs[i]['scores'].data.cpu().numpy()
+
+            if len(boxes) > 0:
+
+                labels = labels - 1
+                labels[labels == -1] = 14
+
+                selected = scores >= detection_threshold
+
+                boxes = boxes[selected].astype(np.int32)
+                scores = scores[selected]
+                labels = labels[selected]
+
+                if len(boxes) > 0:
+                    result = {
+                        'image_id': image_id,
+                        'PredictionString': format_prediction_string(labels, boxes, scores)
+                    }
+
+
+            results.append(result)
+        
+
+# %%
+
+results[0:2]
+
+# %%
+
+test_df = pd.DataFrame(results, columns=['image_id', 'PredictionString'])
+test_df.head()
+
+# %%
+
+
+sample = images[1].permute(1,2,0).cpu().numpy()
+boxes = outputs[1]['boxes'].data.cpu().numpy()
+scores = outputs[1]['scores'].data.cpu().numpy()
+
+boxes = boxes[scores >= detection_threshold].astype(np.int32)
+
+# %%
+
+fig, ax = plt.subplots(1, 1, figsize=(16, 8))
+
+for box in boxes:
+    cv2.rectangle(sample,
+                  (box[0], box[1]),
+                  (box[2], box[3]),
+                  (220, 0, 0), 2)
+    
+ax.set_axis_off()
+ax.imshow(sample)
+
+# %%
+
+test_df.to_csv('submission.csv', index=False)
 
 
 
