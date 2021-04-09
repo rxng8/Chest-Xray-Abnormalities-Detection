@@ -162,30 +162,15 @@ bash download_dataset.sh coco
 
 ---------------
 
-# Tentative:
+# Continue in the [Shopee Project](https://github.com/rxng8/ShopeeKaggle)
 
 
-## Week 9: March 29 - April 2:
+<!-- ## Week 9: March 29 - April 2:
 * Improve and refactor library to the application.
   * Implement according to [this tutorial](https://towardsdatascience.com/training-a-tensorflow-faster-r-cnn-object-detection-model-on-your-own-dataset-b3b175708d6d) and this [kaggle notebook](https://www.kaggle.com/leighplt/starter-faster-r-cnn)
-* Implement on-scratch Faster R-CNN Model. (9 hours)
+* Implement on-scratch Faster R-CNN Model. (9 hours) -->
 
 
-## Week 10: April 5 - April 9:
-
-## Week 11: April 12 - April 15:
-
-## Week 12: April 18 - April 22:
-
-## Week 13: April 25 - April 28:
-
-## Week 14: May 1 - May 5:
-
-## Week 15: May 8 - May 12:
-
-## Week 16: May 15 - May 19:
-
------------------
 
 # Resources:
 1. [https://missinglink.ai/guides/tensorflow/building-faster-r-cnn-on-tensorflow-introduction-and-examples/](https://missinglink.ai/guides/tensorflow/building-faster-r-cnn-on-tensorflow-introduction-and-examples/): 
