@@ -159,10 +159,17 @@ bash download_dataset.sh coco
 [Link to the pytorch saved model](https://drive.google.com/file/d/1YW08sx1qL397th3vLILthrZFiiqLiw9K/view?usp=sharing)
 * [**1 hours**] Writing evaluation and building submission.
 
+## Week 9: March 29 - April 2: [Shopee project week 9](https://github.com/rxng8/ShopeeKaggle#week-9-march-29---april-2)
+
+## Week 10: April 5 - April 9: [Shopee project week 10](https://github.com/rxng8/ShopeeKaggle#week-10-april-5---april-9)
+
+## Week 11: April 12 - April 15: [Shopee project week 11](https://github.com/rxng8/ShopeeKaggle#week-11-april-12---april-15)
+
+## Week 12: April 18 - April 22: [Shopee project week 12](https://github.com/rxng8/ShopeeKaggle#week-12-april-18---april-22)
+
+## Week 13: April 25 - April 28: [Faster R-CNN Research Week 13](https://github.com/rxng8/Faster-R-CNN-Research#week-13-april-25---april-28)
 
 ---------------
-
-# Continue in the [Shopee Project](https://github.com/rxng8/ShopeeKaggle)
 
 
 <!-- ## Week 9: March 29 - April 2:
