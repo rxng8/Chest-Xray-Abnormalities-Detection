@@ -16,7 +16,8 @@ Tensorflow/workspace/training-demo/*
 **tmp/
 
 **.record
-**.csv
+./**.csv
 
 **.pth
 
+!./submission.csv
