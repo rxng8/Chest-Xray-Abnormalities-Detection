@@ -172,6 +172,8 @@ bash download_dataset.sh coco
 
   ## Week 13: April 25 - April 28: [Faster R-CNN Research Week 13](https://github.com/rxng8/Faster-R-CNN-Research#week-13-april-25---april-28)
   
+  ## Week 14: May 2 - May 6: [Faster R-CNN Research Week 13](https://github.com/rxng8/Faster-R-CNN-Research#week-14-may-2---may-6)
+
 </details>
 
 
